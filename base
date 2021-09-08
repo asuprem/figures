@@ -1,0 +1,68 @@
+import matplotlib.pyplot as plt
+import matplotlib.ticker as mticker
+import matplotlib.patches as mpatches
+import numpy as np
+
+
+-------------
+
+plot_size_x=25
+plot_size_y=3
+label_fontsize=20
+xlabel_fontsize=20
+legend_fontsize=20
+title_fontsize=20
+
+x_axes_font_size=20
+x_tick_rotation=45
+
+y_axes_font_size=20
+y_tick_rotation=0
+
+
+color_sets0= {0: "#AA8939", 1:"#022735", 2: "#550F00"}
+color_sets= {0: "#ccb888", 1:"#677d85", 2: "#996f66", 3: "#AA8939", 4:"#022735", 5: "#550F00"}
+color_sets2= {0: "#ccb888", 1:"#677d85", 2: "#996f66"}
+color_sets0= {0: "#d6c69f", 1:"#85979d", 2: "#ad8b84"}
+hatches = ["/","o","\\", "*", "+", "O"]
+hatches2 = ["/","o","\\", "*"]
+marker_sets={0: "o", 1:"s", 2: "D"}
+
+headers = ['name', 'name', 'name']
+
+color_sets = [color_sets[idx] for idx in range(len(color_sets))]
+marker_sets = [marker_sets[idx] for idx in range(len(marker_sets))]
+
+
+-------------
+
+# Plotting
+fig = plt.figure(figsize=(plot_size_x,plot_size_y))
+
+ax2 = fig.add_subplot(141)
+xvals = headers
+y_pos = np.arange(len(xvals))
+
+perfbar = ax2.bar(y_pos, performance, align='center')
+for idx,item in enumerate(performance):
+    perfbar[idx].set_color(color_sets[idx])
+    perfbar[idx].set_edgecolor('black')
+    perfbar[idx].set_hatch(hatches[idx])
+    
+ax2.set_ylabel('mAP', fontsize=label_fontsize)
+for tick in ax2.get_yticklabels():
+    tick.set_rotation(y_tick_rotation)
+    tick.set_fontsize(y_axes_font_size)
+
+ax2.set_xticks(y_pos)
+ax2.set_xticklabels(xvals, fontsize=xlabel_fontsize)
+#ax2.set_yticks(np.arange(0,151,50))
+for tick in ax2.get_xticklabels():
+    tick.set_rotation(x_tick_rotation)
+    tick.set_fontsize(x_axes_font_size)
+
+
+plt.subplots_adjust(wspace=0.3)
+#fig.tight_layout(h_pad=20)
+
+plt.savefig("bddstats.svg",bbox_inches = 'tight')
