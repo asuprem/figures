@@ -38,7 +38,7 @@ marker_sets = [marker_sets[idx] for idx in range(len(marker_sets))]
 
 # Plotting
 fig = plt.figure(figsize=(plot_size_x,plot_size_y))
-
+ax2.legend(headers, fontsize=legend_fontsize, loc="upper left")
 ax2 = fig.add_subplot(141)
 xvals = headers
 y_pos = np.arange(len(xvals))
